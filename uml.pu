@@ -1,0 +1,47 @@
+@startuml SantosPonce
+class Usuarios {
+    + id: int (PK)
+    + nombre: string
+    + correo: string
+    + edad: int
+}
+
+class Libros {
+    + id: int (PK)
+    + id_autor: int (FK)
+    + id_usuario: int (FK)
+    + titulo: string
+    + estado: string
+}
+
+class Reseñas {
+    + id: int (PK)
+    + id_libro: int (FK)
+    + id_usuario: int (FK)
+    + comentario: string
+}
+
+class Autores {
+    + id: int (PK)
+    + nombre: string
+}
+
+class Categorias {
+    + id: int (PK)
+    + categoria: string
+}
+
+class Categorias_Libros {
+    + id: int (PK)
+    + id_categoria: int (FK)
+    + id_libro: int (FK)
+}
+
+Usuarios "1" - "m" Libros : reserva
+Usuarios "1" -- "m" Reseñas : escribe
+Libros "m" -- "1" Autores : publica
+Libros "1" -- "m" Reseñas : tiene
+Categorias_Libros "m" -- "1" Libros : tiene
+Categorias_Libros "m" - "1" Categorias : tiene
+
+@enduml
